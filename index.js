@@ -1,27 +1,27 @@
 const express = require("express");
-const app = express();
-const authRoute = require("./routes/authRoute");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const app = express(); 
+// routes
+const userRoute = require("./routes/userRoute");
+const postRoute = require("./routes/postRoute");
+
+mongoose.connect(
+  "mongodb+srv://thesagar:thesagar@cluster0.rp3jk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  () => {
+    console.log("database connected");
+  }
+);
 
 const middlewares = [
   express.json(),
-  express.urlencoded({ extended: true }),
+  express.urlencoded({extended: true}),
   cors(),
 ];
 app.use(middlewares);
 
-app.use("/auth", authRoute);
-
-app.get("/", (req, res) => {
-  res.json({
-    message: "work",
-  });
-});
-
-mongoose.connect("mongodb://localhost:27017/stack-blog", () => {
-  console.log("database connected");
-});
+app.use("/post", postRoute);
+app.use("/user", userRoute);
 
 app.listen(1000, () => {
   console.log(`server is running at ${1000}`);

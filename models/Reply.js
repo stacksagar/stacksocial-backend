@@ -1,7 +1,7 @@
 //* post, user body, replies
 
 const {Schema, model} = require("mongoose");
-const commentSchema = new Schema(
+const replySchema = new Schema(
   {
     body: {
       type: String,
@@ -15,22 +15,14 @@ const commentSchema = new Schema(
       required: true,
     },
 
-    post: {
+    comment: {
       type: Schema.Types.ObjectId,
-      ref: "Post",
+      ref: "Comment",
       required: true,
     },
-
-    replies: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Reply",
-        required: true,
-      },
-    ],
   },
   {timestamps: true}
 );
 
-const Comment = model("Comment", commentSchema);
-module.exports = Comment;
+const Reply = model("Reply", replySchema);
+module.exports = Reply;

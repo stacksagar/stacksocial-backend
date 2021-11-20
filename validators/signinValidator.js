@@ -1,34 +1,38 @@
-const { body } = require("express-validator");
+const {body} = require("express-validator");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const signupValidator = [
-  body("email")
-    .isEmail()
-    .withMessage("please provide valid email address!")
-    .custom(async (email) => {
-      const user = await User.findOne({ email });
+
+const signinValidator = [
+  body("username")
+    .notEmpty()
+    .withMessage("required!")
+    .custom(async (username) => {
+      console.log("username", username);
+      const user = await User.findOne({username});
       if (!user) {
-        throw new Error("user not found!");
+        throw new Error("Invalid Username or Password!");
       }
       return true;
     }),
+
   body("password")
     .notEmpty()
-    .withMessage("password is required!")
+    .withMessage("required!")
 
-    .custom(async (password, { req }) => {
-      const user = await User.findOne({ email: req.body.email });
+    .custom(async (password, {req}) => {
+      const user = await User.findOne({username: req.body.username});
+
       if (!user) {
-        return true;
+        throw new Error("Invalid Username or Password!");
       }
 
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        throw new Error("password doesn't match!");
+        throw new Error("Invalid Username or Password!");
       }
 
       return true;
     }),
 ];
 
-module.exports = signupValidator;
+module.exports = signinValidator;
