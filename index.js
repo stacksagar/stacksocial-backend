@@ -22,6 +22,10 @@ app.use(middlewares);
 
 app.use("/post", postRoute);
 app.use("/user", userRoute);
+
+app.get("/", (req, res) => {
+  res.send("running");
+});
 const port = process.env.PORT || 1000;
 app.listen(port, () => {
   console.log(`server is running at ${1000}`);
