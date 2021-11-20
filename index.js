@@ -26,7 +26,9 @@ app.use("/user", userRoute);
 app.get("/", (req, res) => {
   res.send("running");
 });
-const port = process.env.PORT || 1000;
-app.listen(port, () => {
-  console.log(`server is running at ${1000}`);
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`server is running at ${3000}`);
 });

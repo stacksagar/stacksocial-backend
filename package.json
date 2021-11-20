@@ -1,12 +1,13 @@
 {
-  "name": "social-media-app",
-  "version": "1.0",
+  "name": "stacksocial-backend",
+  "version": "2.0",
   "main": "index.js",
   "author": "stacksagar",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "development": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
