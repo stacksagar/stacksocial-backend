@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const app = express(); 
+const app = express();
 // routes
 const userRoute = require("./routes/userRoute");
 const postRoute = require("./routes/postRoute");
@@ -22,7 +22,7 @@ app.use(middlewares);
 
 app.use("/post", postRoute);
 app.use("/user", userRoute);
-
-app.listen(1000, () => {
+const port = process.env.PORT || 1000;
+app.listen(port, () => {
   console.log(`server is running at ${1000}`);
 });
